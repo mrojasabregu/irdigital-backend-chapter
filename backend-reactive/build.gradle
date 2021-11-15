@@ -1,0 +1,43 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.4'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'org.irdigital.techmeup'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+	maven {
+		url 'https://pkgs.dev.azure.com/IRCorporativo/2f84cc12-aef2-41c3-9402-ba1b031145f6/_packaging/anka-central%40Release/maven/v1'
+		name 'anka-central'
+		credentials {
+			username 'IRCorporativo'
+			password 'iv4mxjxdfmqpfpofeo5yjrxnjn76ecyfyqsx7m7dp2umjf5twsva'
+		}
+	}
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+	implementation 'pe.intercorpretail.anka:anka-starter-exception-handler:1.0.0'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'io.projectreactor:reactor-test'
+	runtimeOnly 'io.r2dbc:r2dbc-postgresql'
+	runtimeOnly 'org.postgresql:postgresql'
+}
+
+test {
+	useJUnitPlatform()
+}

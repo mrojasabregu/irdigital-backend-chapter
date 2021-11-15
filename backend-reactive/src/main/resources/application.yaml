@@ -1,0 +1,43 @@
+server:
+  port: 8080
+spring:
+  main:
+    banner-mode: "off"
+  codec:
+    max-in-memory-size: 20MB
+  http:
+    encoding:
+      charset: "UTF-8"
+  jackson:
+    time-zone: "America/Lima"
+    date-format: "yyyy-MM-dd"
+    timestamp-format: "yyyy-MM-dd HH:mm:ss"
+  r2dbc:
+    url: "r2dbc:postgres://${DATABASE_IP:127.0.0.1}:5432/vtex_demo?serverTimezone=America/Lima"
+    driverClassName: "postgres"
+    username: "${DATABASE_USERNAME:postgres}"
+    password: "${DATABASE_PASSWORD:casa1234}"
+---
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - metrics
+          - prometheus
+---
+vtex:
+  credentialsMap:
+    hpsa:
+      url: "http://localhost:3000/api/hpsa"
+      appToken: "token-promart"
+      appKey: "vtexappkey-promart-mock"
+    tpsa:
+      url: "http://localhost:3000/api/tpsa"
+      appToken: "token-oechsle"
+      appKey: "vtexappkey-oechsle-mock"
+    pvea:
+      url: "http://localhost:3000/api/pvea"
+      appToken: "token-pvea"
+      appKey: "vtexappkey-plazavea-mock"
