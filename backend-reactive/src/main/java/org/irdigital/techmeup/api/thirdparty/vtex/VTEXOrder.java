@@ -1,4 +1,4 @@
-package org.irdigital.techmeup.api.thirdparty;
+package org.irdigital.techmeup.api.thirdparty.vtex;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

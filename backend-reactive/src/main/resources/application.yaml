@@ -3,8 +3,13 @@ server:
 spring:
   main:
     banner-mode: "off"
+  cloud:
+    gcp:
+      credentials:
+        encoded-key: "${ENCODED_KEY}"
+        project-id: "${PROJECT_ID}"
   codec:
-    max-in-memory-size: 20MB
+    max-in-memory-size: 30MB
   http:
     encoding:
       charset: "UTF-8"
@@ -26,6 +31,12 @@ management:
           - health
           - metrics
           - prometheus
+---
+json-placeholder:
+  url: "${JSON_PLACEHOLDER:https://jsonplaceholder.typicode.com}"
+---
+attachments:
+  bucketName: "backend-chapter-demo"
 ---
 vtex:
   credentialsMap:

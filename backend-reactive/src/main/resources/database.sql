@@ -23,3 +23,13 @@ CREATE TABLE orders_log(
     event_timestamp TIMESTAMP WITHOUT TIME ZONE,
     PRIMARY KEY(log_id)
 );
+
+CREATE TABLE attachments(
+    attachment_id UUID,
+    attachment_hash TEXT,
+    attachment_name TEXT,
+    attachment_mime VARCHAR(200),
+    attachment_size LONG,
+    attachment_uri TEXT,
+    PRIMARY KEY(attachment_id)
+);

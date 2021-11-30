@@ -1,15 +1,12 @@
-package org.irdigital.techmeup.api.thirdparty;
+package org.irdigital.techmeup.api.thirdparty.vtex;
 
 import lombok.Data;
 import org.irdigital.techmeup.domain.exceptions.VTEXAnkaException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
-import pe.intercorpretail.anka.core.exception.model.AnkaErrorCode;
-import pe.intercorpretail.anka.core.exception.model.AnkaException;
 import reactor.core.publisher.Mono;
 import reactor.util.retry.Retry;
 
@@ -50,7 +47,7 @@ public class VTEXWebClient {
                 .onStatus(this::handleStatus,clientResponse -> {
                     return clientResponse
                             .bodyToMono(String.class)
-                            .map(message -> new VTEXAnkaException(tenantId, orderId, "HTTP status error from vtex with response "+message));
+                            .map(message -> new VTEXAnkaException(tenantId, orderId, "HTTP status error from vtex with response " + message));
                 })
                 .bodyToMono(VTEXOrder.class)
                 .timeout(Duration.ofMillis(5000), Mono.error(new VTEXAnkaException(tenantId, orderId, "Timeout Exception handling VTEX order " + orderId)))
